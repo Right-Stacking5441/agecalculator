@@ -960,3 +960,95 @@ body.widget { --leaf-h: 470px; }
      leaves only ~40px for the result and the page scrolls sideways. */
   .obj-pair { grid-template-columns: minmax(0, 1fr) min-content; }
 }
+
+/* Cookie consent banner and the cookie table on /privacy/. */
+#consent-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3) var(--s5);
+  background: var(--paper);
+  border-top: 1.5px solid var(--ink);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.45;
+  padding: var(--s4) var(--s5) calc(var(--s4) + env(safe-area-inset-bottom, 0px));
+  max-height: min(50dvh, calc(100dvh - 4.5rem));
+  box-sizing: border-box;
+}
+#consent-banner[hidden],
+html.consent-chosen #consent-banner {
+  display: none !important;
+}
+#consent-banner:focus {
+  outline: 3px solid var(--focus);
+  outline-offset: -3px;
+}
+#consent-banner p {
+  margin: 0;
+  flex: 1 1 16rem;
+  max-width: 46rem;
+  max-height: var(--consent-p-max, 40dvh);
+  overflow-y: auto;
+}
+.consent-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s3);
+}
+#consent-banner button {
+  appearance: none;
+  font: 600 16px/1 "Libre Franklin", "LF Fallback", Arial, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 2px;
+  padding: 0 var(--s4);
+  height: 44px;
+  min-height: 44px;
+  min-width: 44px;
+  cursor: pointer;
+}
+@media (hover: hover) {
+  #consent-banner button:hover { background: var(--desk); }
+}
+html.has-consent-banner body,
+body.has-consent-banner {
+  padding-bottom: var(--consent-h, 7.5rem);
+}
+.cookie-table-wrap {
+  margin: 0 0 var(--s4);
+  overflow-x: auto;
+}
+.cookie-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+.cookie-table th {
+  text-align: left;
+  font-weight: 700;
+  border-bottom: 1.5px solid var(--ink);
+  padding: var(--s2) var(--s4) var(--s2) 0;
+  vertical-align: bottom;
+}
+.cookie-table td {
+  padding: var(--s3) var(--s4) var(--s3) 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+.cookie-table code {
+  font: 14px/1.4 ui-monospace, Menlo, Consolas, monospace;
+}
+@media print {
+  #consent-banner { display: none !important; }
+  html.has-consent-banner body,
+  body.has-consent-banner { padding-bottom: 0 !important; }
+}
