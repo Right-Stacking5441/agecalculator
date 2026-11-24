@@ -82,7 +82,7 @@
   function sanitizedTitle(pathname, title) {
     var p = pathWithinSite(pathname || location.pathname);
     if (/^\/past\/\d{4}\/?$/.test(p)) {
-      return 'How old was I? Age on any past date';
+      return 'Age on a past date, worked out in years, months and days';
     }
     return title || document.title || '';
   }
